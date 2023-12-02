@@ -16,8 +16,8 @@ app.use(cors())
 app.use(express.json());
 
 // Endpoints
+// Alerts
 app.get('/api/alerts', async (req, res) => {
-    console.log(req.ip.split(':')[req.ip.split(':').length-1])
     try {
         const data = await endpoints['alerts']('GET');
         res.json(data);
@@ -43,6 +43,42 @@ app.delete('/api/alerts', async (req, res) => {
         res.status(500).json({error: 'Internal Server Error'});
     }
 });
+// Grocery
+app.get('/api/grocery', async (req, res) => {
+    try {
+        const data = await endpoints['grocery']('GET');
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+app.put('/api/grocery', async (req, res) => {
+    var payload = req.body
+    try {
+        const data = await endpoints['grocery']('PUT', payload.description);
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+app.delete('/api/grocery', async (req, res) => {
+    var payload = req.body
+    try {
+        const data = await endpoints['grocery']('DELETE', payload.id);
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+app.put('/api/newGroceryList', async (req, res) => {
+    try {
+        const data = await endpoints['newGroceryList']('PUT');
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+
 
 // Create an HTTPS server
 const server = https.createServer(options, app);
