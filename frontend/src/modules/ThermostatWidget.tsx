@@ -11,26 +11,26 @@ function ThermostatWidget() {
   const alertList = ["Tryna smoke?", "No way!", "I'm Arjun!"];
   const apiUrl = `https://${config["api-ip"]}:${config["api-port"]}`;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(`${apiUrl}/api/fuckeduparjun`);
-        const data = response.data;
-        // Do something with the data
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    // Call fetchData initially
-    fetchData();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.post(`${apiUrl}/api/fuckeduparjun`);
+  //       const data = response.data;
+  //       // Do something with the data
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   // Call fetchData initially
+  //   fetchData();
 
-    // Set up an interval to call fetchData every 5 seconds (5000 milliseconds)
-    const intervalId = setInterval(fetchData, 60000);
+  //   // Set up an interval to call fetchData every 5 seconds (5000 milliseconds)
+  //   const intervalId = setInterval(fetchData, 60000);
 
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []);
+  //   // Clean up the interval when the component unmounts
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
     <div className="thermostat-widget widget">
