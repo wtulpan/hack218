@@ -1,6 +1,6 @@
 const db = require('./db');
 
-async function alerts(type,data) {
+async function alerts(type, data) {
     const dt = new Date()
     console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][alerts][${type}]`)
     if(type === 'GET') {
@@ -17,7 +17,7 @@ async function alerts(type,data) {
     }
 }
 
-async function grocery(type,data) {
+async function grocery(type, data) {
     const dt = new Date()
     console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][grocery][${type}]`)
     if(type === 'GET') {
@@ -48,4 +48,19 @@ async function newGroceryList(type, data) {
     }
 }
 
-module.exports = {'alerts': alerts, 'grocery': grocery, 'newGroceryList': newGroceryList}
+async function chores(type, data) {
+    const dt = new Date()
+    console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][chores][${type}]`)
+    if(type === 'GET') {
+        const [table_data, bullshit] = await db.execute(`select c.name as name, ch.chore_id as id, ch.completed as completed from chores c join chore_history ch on c.id=ch.chore_id order by ch.completed;`)
+        return table_data
+    } else if(type === 'POST') {
+        const dt = new Date()
+        const [table_data, bullshit] = await db.execute(`update chore_history set completed="${dt.toISOString().replace('T',' ').slice(0,-1)}" where id=${data}`)
+        return {'message': 'success'}
+    } else {
+        return {'error': `${type} is not supported for this endpoint`}
+    }
+}
+
+module.exports = {'alerts': alerts, 'grocery': grocery, 'newGroceryList': newGroceryList, 'chores': chores}

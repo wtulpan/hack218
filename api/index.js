@@ -78,6 +78,24 @@ app.put('/api/newGroceryList', async (req, res) => {
         res.status(500).json({error: 'Internal Server Error'});
     }
 });
+// Chores
+app.get('/api/chores', async (req, res) => {
+    try {
+        const data = await endpoints['chores']('GET');
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+app.post('/api/chores', async (req, res) => {
+    var payload = req.body
+    try {
+        const data = await endpoints['chores']('POST', payload.id);
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
 
 
 // Create an HTTPS server
