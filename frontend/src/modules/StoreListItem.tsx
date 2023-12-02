@@ -1,3 +1,5 @@
+import DeleteButton from "./DeleteButton";
+
 interface StoreListItemProps {
   id: number;
   description: string;
@@ -8,7 +10,7 @@ function StoreListItem({ id, description, onDelete }: StoreListItemProps) {
   return (
     <div>
       {description}
-      <button onClick={() => onDelete(id)}>Delete</button>
+      <DeleteButton onDelete={() => onDelete(id)} />
     </div>
   );
 }

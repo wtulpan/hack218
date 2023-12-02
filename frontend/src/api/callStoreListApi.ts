@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "../config.json";
 
 const apiUrl = `https://${config["api-ip"]}:${config["api-port"]}/api/grocery`;
+const newListUrl = `https://${config["api-ip"]}:${config["api-port"]}/api/newGroceryList`;
 
 async function getStoreList() {
   try {
@@ -52,4 +53,19 @@ async function deleteStoreListItem(id: number) {
   }
 }
 
-export { getStoreList, addStoreListItem, deleteStoreListItem };
+async function newStoreList() {
+  try {
+    axios
+      .put(newListUrl, {})
+      .then((response) => {
+        console.log("New Grocery List Request Successful:", response.data);
+      })
+      .catch((error) => {
+        console.error("New Grocery List Request Failed:", error);
+      });
+  } catch (error) {
+    console.error("Error creating new store list:", error);
+  }
+}
+
+export { getStoreList, addStoreListItem, deleteStoreListItem, newStoreList };

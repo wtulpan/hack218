@@ -1,4 +1,5 @@
 import "./AlertListItem.css";
+import DeleteButton from "./DeleteButton";
 
 interface AlertListItemProps {
   id: number;
@@ -24,7 +25,7 @@ function AlertListItem({
   return (
     <div className={classNames}>
       {message}
-      <button onClick={() => onDelete(id)}>Delete</button>
+      <DeleteButton onDelete={() => onDelete(id)} />
     </div>
   );
 }

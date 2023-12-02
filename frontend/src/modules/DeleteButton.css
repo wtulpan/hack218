@@ -1,0 +1,6 @@
+.delete-button img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: .25rem;
+    display: inline
+}

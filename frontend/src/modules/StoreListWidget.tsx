@@ -3,6 +3,7 @@ import {
   getStoreList,
   addStoreListItem,
   deleteStoreListItem,
+  newStoreList,
 } from "../api/callStoreListApi";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import StoreListItem from "./StoreListItem";
@@ -49,6 +50,11 @@ function StoreListWidget() {
     setInputValue("");
   };
 
+  const handleNewStoreList = () => {
+    newStoreList();
+    fetchData();
+  };
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -66,6 +72,7 @@ function StoreListWidget() {
         ></input>
         <button>Submit</button>
       </form>
+      <button onClick={handleNewStoreList}>Clear List</button>
     </div>
   );
 }
