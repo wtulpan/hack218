@@ -22,7 +22,7 @@ function ThermostatWidget() {
       }
     };
     fetchData();
-    const intervalId = setInterval(fetchData, 5000);
+    const intervalId = setInterval(fetchData, 180000);
     return () => clearInterval(intervalId);
   }, []);
 
