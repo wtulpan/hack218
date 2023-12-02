@@ -6,8 +6,8 @@ function ThermostatWidget() {
   const [temperature, setTemperature] = useState<number>(70);
 
   return (
-    <div className="thermostat-widget">
-      <div className="title">Temperature</div>
+    <div className="thermostat-widget widget">
+      <div className="widget-title">Temperature</div>
       <div className="temperature">
         <div className="set-to-temperature">
           <div>Set to</div>
