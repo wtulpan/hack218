@@ -1,4 +1,4 @@
-import config from "../../config.json";
+import config from "./config.json";
 
 const apiIp = config["api-ip"];
 const apiPort = config["api-port"];
