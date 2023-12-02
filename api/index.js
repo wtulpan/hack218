@@ -2,6 +2,7 @@ const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const cors = require('cors')
+const endpoints = require('./endpoints')
 
 const app = express();
 const port = 3000;
@@ -15,14 +16,11 @@ const options = {
 app.use(cors())
 
 // Define a simple endpoint
-app.post('/api/arjun', (req, res) => {
-    res.json({ message: 'my whip is way faster than your whip' });
-    console.log(req.ip)
+app.get('/api/alerts', (req, res) => {
+    res.json(endpoints['alerts']('GET'))
 });
-
-app.post('/api/fuckeduparjun', (req, res) => {
-    res.json({ message: 'youre doing rediculous stuff in the street'});
-    console.log(req.ip)
+app.post('/api/alerts', (req, res) => {
+    res.json(alerts('POST', {}))
 });
 
 // Create an HTTPS server
