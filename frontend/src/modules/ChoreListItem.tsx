@@ -1,3 +1,5 @@
+import "./ChoreListItem.css";
+
 interface ChoreListItemProps {
   id: number;
   name: string;
@@ -14,9 +16,15 @@ function ChoreListItem({
   const datetime = new Date(lastCompleted);
 
   return (
-    <div>
-      {name} Last Completed: {datetime.toDateString()}
-      <button onClick={() => onCompleted(id)}>Mark Completed</button>
+    <div className="chore-list-item">
+      {" "}
+      <div className="mark-complete">
+        <button onClick={() => onCompleted(id)}>Mark Completed</button>
+      </div>
+      <div className="chore-name">{name}</div>
+      <div className="last-completed">
+        Last Completed: {datetime.toDateString()}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,21 @@
+.chore-list-item {
+    margin: .5rem;
+    padding: .5rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: .5rem;
+}
+
+.chore-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.last-completed {
+    color: gray
+}
+
+.mark-complete {
+    float: right;
+}

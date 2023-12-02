@@ -1,4 +1,5 @@
 import DeleteButton from "./DeleteButton";
+import "./StoreListItem.css";
 
 interface StoreListItemProps {
   id: number;
@@ -8,9 +9,11 @@ interface StoreListItemProps {
 
 function StoreListItem({ id, description, onDelete }: StoreListItemProps) {
   return (
-    <div>
-      {description}
-      <DeleteButton onDelete={() => onDelete(id)} />
+    <div className="store-list-item">
+      <div className="delete">
+        <DeleteButton onDelete={() => onDelete(id)} />
+      </div>
+      <div className="description">{description}</div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import "./Grid.css";
+import "./StoreListWidget.css";
 import {
   getStoreList,
   addStoreListItem,
@@ -7,6 +8,7 @@ import {
 } from "../api/callStoreListApi";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import StoreListItem from "./StoreListItem";
+import AddButton from "./AddButton";
 
 interface StoreListItem {
   id: number;
@@ -34,20 +36,23 @@ function StoreListWidget() {
   }, []);
 
   const storeListItems = storeList.map((storeListItem, index) => (
-    <div key={index}>
-      <StoreListItem
-        id={storeListItem.id}
-        description={storeListItem.description}
-        onDelete={handleDeleteStoreListItem}
-      />
-    </div>
+    <StoreListItem
+      key={index}
+      id={storeListItem.id}
+      description={storeListItem.description}
+      onDelete={handleDeleteStoreListItem}
+    />
   ));
 
-  const handleAddStoreListItem = (e: FormEvent) => {
-    e.preventDefault();
+  const handleAddStoreListItem = () => {
     addStoreListItem(inputValue);
     fetchData();
     setInputValue("");
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    handleAddStoreListItem();
   };
 
   const handleNewStoreList = () => {
@@ -61,18 +66,23 @@ function StoreListWidget() {
 
   return (
     <div className="store-list-widget widget">
-      <div className="widget-title">Store List</div>
-      <div>{storeListItems}</div>
-      <form onSubmit={handleAddStoreListItem}>
-        <label>Add Item </label>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-        ></input>
-        <button>Submit</button>
-      </form>
-      <button onClick={handleNewStoreList}>Clear List</button>
+      <div>
+        <div className="new-store-list-button">
+          <button onClick={handleNewStoreList}>New List</button>
+        </div>
+        <div className="widget-title">Store List</div>
+      </div>
+      <div className="add-store-list-item">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+          ></input>
+          <AddButton onAdd={handleAddStoreListItem} />
+        </form>
+      </div>
+      <div className="store-list">{storeListItems}</div>
     </div>
   );
 }

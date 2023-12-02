@@ -1,0 +1,17 @@
+.store-list-item {
+    margin: .25rem;
+    padding: .5rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: .5rem;
+    height: 3rem;
+}
+
+.description {
+    font-size: 1.5rem;
+}
+
+.delete {
+
+}
