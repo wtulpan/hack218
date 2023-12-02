@@ -6,6 +6,7 @@ import config from "../config.json";
 
 function ThermostatWidget() {
   const [temperature, setTemperature] = useState<number>(70);
+  const [coolingState, setCoolingState] = useState<string>("Unknown");
 
   const alertList = ["Tryna smoke?", "No way!", "I'm Arjun!"];
   const apiUrl = `https://${config["api-ip"]}:${config["api-port"]}`;
@@ -25,7 +26,7 @@ function ThermostatWidget() {
     fetchData();
 
     // Set up an interval to call fetchData every 5 seconds (5000 milliseconds)
-    const intervalId = setInterval(fetchData, 5000);
+    const intervalId = setInterval(fetchData, 60000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
@@ -39,7 +40,8 @@ function ThermostatWidget() {
           <div>Set to</div>
           <div>69</div>
         </div>
-        <div className="current-temperature">70</div>
+        <div className="current-temperature">{temperature}</div>
+        <div className="cooling-state">Cooling State: {coolingState}</div>
       </div>
     </div>
   );

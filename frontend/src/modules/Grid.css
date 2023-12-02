@@ -4,7 +4,9 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-gap: 20px; /* Adjust the gap between grid items */
+    grid-gap: 1rem; /* Adjust the gap between grid items */
+    padding: .5rem;
+    box-sizing: border-box;
 }
 
 .thermostat-widget {
@@ -28,14 +30,6 @@
     grid-row: 2;
     grid-column: 3 / 5;
     background-color: purple;
-}
-
-/* Sub-components (Grid Items) */
-.sub-component {
-background-color: #ffffff; /* Background color for sub-components */
-padding: 20px; /* Adjust padding as needed */
-border: 1px solid #ccc; /* Add borders if desired */
-/* Add other styling properties for sub-components */
 }
 
 .widget {

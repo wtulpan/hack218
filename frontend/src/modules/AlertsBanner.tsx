@@ -1,42 +1,70 @@
 import "./Grid.css";
 import "./AlertsBanner.css";
-import { useEffect } from "react";
-import axios from "axios";
-import config from "../config.json";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import AlertListItem from "./AlertListItem";
+import { getAlerts, addAlert, deleteAlert } from "../api/callAlertsApi";
+
+interface AlertItem {
+  id: number;
+  text: string;
+  created: string;
+}
 
 function AlertsBanner() {
-  const alertList = ["Tryna smoke?", "No way!", "I'm Arjun!"];
-  const apiUrl = `https://${config["api-ip"]}:${config["api-port"]}`;
+  const [alertList, setAlertList] = useState<AlertItem[]>([]);
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const fetchData = async () => {
+    const alerts = await getAlerts();
+    setAlertList(alerts);
+  };
+
+  const handleDeleteAlert = (id: number) => {
+    deleteAlert(id);
+    fetchData();
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(`${apiUrl}/api/arjun`);
-        const data = response.data;
-        // Do something with the data
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    // Call fetchData initially
     fetchData();
-
-    // Set up an interval to call fetchData every 5 seconds (5000 milliseconds)
     const intervalId = setInterval(fetchData, 5000);
-
-    // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
-  const alerts = alertList.map((alert, index) => (
-    <div key={index}>{alert}</div>
+  const alerts = alertList.map((alertItem: AlertItem, index) => (
+    <div key={index}>
+      <AlertListItem
+        id={alertItem.id}
+        message={alertItem.text}
+        dateString={alertItem.created}
+        onDelete={handleDeleteAlert}
+      />
+    </div>
   ));
+
+  const handleAddAlert = (e: FormEvent) => {
+    e.preventDefault();
+    addAlert(inputValue);
+    fetchData();
+    setInputValue("");
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
 
   return (
     <div className="alerts-banner widget">
       <div className="widget-title">Alerts</div>
       <div className="alerts">{alerts}</div>
+      <form onSubmit={handleAddAlert}>
+        <label>Add an Alert </label>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+        ></input>
+        <button>Submit</button>
+      </form>
     </div>
   );
 }

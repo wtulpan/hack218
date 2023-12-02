@@ -1,0 +1,16 @@
+.alert-list-item {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    margin: .5rem;
+    padding: .5rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.recent {
+    background-color: yellow;
+}
