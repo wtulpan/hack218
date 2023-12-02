@@ -13,11 +13,31 @@ const options = {
     cert: fs.readFileSync('server.cert'),
 };
 app.use(cors())
+app.use(express.json());
 
 // Endpoints
 app.get('/api/alerts', async (req, res) => {
+    console.log(req.ip.split(':')[req.ip.split(':').length-1])
     try {
         const data = await endpoints['alerts']('GET');
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+app.put('/api/alerts', async (req, res) => {
+    var payload = req.body
+    try {
+        const data = await endpoints['alerts']('PUT', payload.text);
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+app.delete('/api/alerts', async (req, res) => {
+    var payload = req.body
+    try {
+        const data = await endpoints['alerts']('DELETE', payload.id);
         res.json(data);
     } catch (error) {
         res.status(500).json({error: 'Internal Server Error'});
