@@ -23,12 +23,11 @@ function ChoresWidget() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleMarkCompleted = (id: number) => {
-    markChoreDone(id);
+  const handleMarkCompleted = async (id: number) => {
+    await markChoreDone(id);
     fetchData();
   };
 
-  console.log(choreList);
   const chores = choreList.map((chore, index) => (
     <ChoreListItem
       key={index}

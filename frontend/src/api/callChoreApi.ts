@@ -18,14 +18,8 @@ async function markChoreDone(id: number) {
     id,
   };
   try {
-    axios
-      .post(apiUrl, requestData)
-      .then((response) => {
-        console.log("POST Request Successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("POST Request Failed:", error);
-      });
+    const response = await axios.post(apiUrl, requestData);
+    console.log("Add Request Successful:", response.data);
   } catch (error) {
     console.error("Error marking chore done:", error);
   }

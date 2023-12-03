@@ -7,10 +7,10 @@ const newListUrl = `https://${config["api-ip"]}:${config["api-port"]}/api/newGro
 async function getStoreList() {
   try {
     const response = await axios.get(apiUrl);
-    const alerts = response.data;
-    return alerts;
+    const storeList = response.data;
+    return storeList;
   } catch (error) {
-    console.error("Error fetching alerts:", error);
+    console.error("Error fetching store list:", error);
   }
 }
 
@@ -20,14 +20,8 @@ async function addStoreListItem(description: string) {
     description,
   };
   try {
-    axios
-      .put(apiUrl, requestData)
-      .then((response) => {
-        console.log("PUT Request Successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("PUT Request Failed:", error);
-      });
+    const response = await axios.put(apiUrl, requestData);
+    console.log("Add Request Successful:", response.data);
   } catch (error) {
     console.error("Error adding store list item:", error);
   }
@@ -40,14 +34,8 @@ async function deleteStoreListItem(id: number) {
     },
   };
   try {
-    axios
-      .delete(apiUrl, requestData)
-      .then((response) => {
-        console.log("DELETE Request Successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("DELETE Request Failed:", error);
-      });
+    const response = await axios.delete(apiUrl, requestData);
+    console.log("DELETE Request Successful:", response.data);
   } catch (error) {
     console.error("Error deleting store list item:", error);
   }
@@ -55,14 +43,8 @@ async function deleteStoreListItem(id: number) {
 
 async function newStoreList() {
   try {
-    axios
-      .put(newListUrl, {})
-      .then((response) => {
-        console.log("New Grocery List Request Successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("New Grocery List Request Failed:", error);
-      });
+    const response = await axios.put(newListUrl, {});
+    console.log("New store list Request Successful:", response.data);
   } catch (error) {
     console.error("Error creating new store list:", error);
   }

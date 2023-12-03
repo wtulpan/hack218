@@ -24,8 +24,8 @@ function StoreListWidget() {
     setStoreList(storeListItems);
   };
 
-  const handleDeleteStoreListItem = (id: number) => {
-    deleteStoreListItem(id);
+  const handleDeleteStoreListItem = async (id: number) => {
+    await deleteStoreListItem(id);
     fetchData();
   };
 
@@ -44,8 +44,8 @@ function StoreListWidget() {
     />
   ));
 
-  const handleAddStoreListItem = () => {
-    addStoreListItem(inputValue);
+  const handleAddStoreListItem = async () => {
+    await addStoreListItem(inputValue);
     fetchData();
     setInputValue("");
   };
@@ -55,8 +55,8 @@ function StoreListWidget() {
     handleAddStoreListItem();
   };
 
-  const handleNewStoreList = () => {
-    newStoreList();
+  const handleNewStoreList = async () => {
+    await newStoreList();
     fetchData();
   };
 
