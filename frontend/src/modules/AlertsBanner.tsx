@@ -26,8 +26,8 @@ function AlertsBanner() {
 
   useEffect(() => {
     fetchData();
-    // const intervalId = setInterval(fetchData, 5000);
-    // return () => clearInterval(intervalId);
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
   const alerts = alertList.map((alertItem: AlertItem, index) => (
