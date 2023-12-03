@@ -70,7 +70,7 @@ function StoreListWidget() {
         <div className="new-store-list-button">
           <button onClick={handleNewStoreList}>New List</button>
         </div>
-        <div className="widget-title">Store List</div>
+        <div className="widget-title">Shopping List</div>
       </div>
       <div className="add-store-list-item">
         <form onSubmit={handleSubmit}>
