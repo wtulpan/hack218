@@ -19,15 +19,15 @@ function AlertsBanner() {
     setAlertList(alerts);
   };
 
-  const handleDeleteAlert = (id: number) => {
-    deleteAlert(id);
+  const handleDeleteAlert = async (id: number) => {
+    await deleteAlert(id);
     fetchData();
   };
 
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 5000);
-    return () => clearInterval(intervalId);
+    // const intervalId = setInterval(fetchData, 5000);
+    // return () => clearInterval(intervalId);
   }, []);
 
   const alerts = alertList.map((alertItem: AlertItem, index) => (
@@ -41,9 +41,9 @@ function AlertsBanner() {
     </div>
   ));
 
-  const handleAddAlert = (e: FormEvent) => {
+  const handleAddAlert = async (e: FormEvent) => {
     e.preventDefault();
-    addAlert(inputValue);
+    await addAlert(inputValue);
     fetchData();
     setInputValue("");
   };

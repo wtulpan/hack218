@@ -18,14 +18,8 @@ async function addAlert(message: string) {
     text: message,
   };
   try {
-    axios
-      .put(apiUrl, requestData)
-      .then((response) => {
-        console.log("PUT Request Successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("PUT Request Failed:", error);
-      });
+    const resp = await axios.put(apiUrl, requestData);
+    console.log("Add Request Successful:", resp.data);
   } catch (error) {
     console.error("Error adding alert:", error);
   }
@@ -38,16 +32,10 @@ async function deleteAlert(id: number) {
     },
   };
   try {
-    axios
-      .delete(apiUrl, requestData)
-      .then((response) => {
-        console.log("DELETE Request Successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("DELETE Request Failed:", error);
-      });
+    const resp = await axios.delete(apiUrl, requestData);
+    console.log("DELETE Request Successful:", resp.data);
   } catch (error) {
-    console.error("Error deleting alert:", error);
+    console.error("DELETE Request Failed:", error);
   }
 }
 
