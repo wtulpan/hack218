@@ -10,33 +10,37 @@ const params = {
 const url = "https://api.open-meteo.com/v1/forecast";
 
 async function getWeather() {
-  const responses = await fetchWeatherApi(url, params);
+  try {
+    const responses = await fetchWeatherApi(url, params);
 
-  // Helper function to form time ranges
-  const range = (start: number, stop: number, step: number) =>
-    Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
+    // Helper function to form time ranges
+    const range = (start: number, stop: number, step: number) =>
+      Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
 
-  const response = responses[0];
+    const response = responses[0];
 
-  // Attributes for timezone and location
-  const utcOffsetSeconds = response.utcOffsetSeconds();
-  const timezone = response.timezone();
-  const timezoneAbbreviation = response.timezoneAbbreviation();
-  const latitude = response.latitude();
-  const longitude = response.longitude();
+    // Attributes for timezone and location
+    const utcOffsetSeconds = response.utcOffsetSeconds();
+    const timezone = response.timezone();
+    const timezoneAbbreviation = response.timezoneAbbreviation();
+    const latitude = response.latitude();
+    const longitude = response.longitude();
 
-  const hourly = response.hourly()!;
+    const hourly = response.hourly()!;
 
-  const current = response.current()!;
+    const current = response.current()!;
 
-  const weatherData = {
-    current: {
-      time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
-      temperature2m: current.variables(0)!.value(),
-    },
-  };
+    const weatherData = {
+      current: {
+        time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
+        temperature2m: current.variables(0)!.value(),
+      },
+    };
 
-  return weatherData.current.temperature2m;
+    return weatherData.current.temperature2m;
+  } catch (error) {
+    return 999;
+  }
 }
 
 export { getWeather };

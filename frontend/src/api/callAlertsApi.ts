@@ -10,6 +10,7 @@ async function getAlerts() {
     return alerts;
   } catch (error) {
     console.error("Error fetching alerts:", error);
+    return [];
   }
 }
 

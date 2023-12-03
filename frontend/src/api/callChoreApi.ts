@@ -10,6 +10,7 @@ async function getChores() {
     return alerts;
   } catch (error) {
     console.error("Error fetching chores:", error);
+    return [];
   }
 }
 

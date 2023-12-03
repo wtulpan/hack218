@@ -11,6 +11,7 @@ async function getStoreList() {
     return storeList;
   } catch (error) {
     console.error("Error fetching store list:", error);
+    return [];
   }
 }
 
