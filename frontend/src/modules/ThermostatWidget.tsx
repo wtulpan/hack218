@@ -6,7 +6,7 @@ import { getWeather } from "../api/callThermostatApi";
 import config from "../config.json";
 
 function ThermostatWidget() {
-  const [temperature, setTemperature] = useState<number>(70);
+  const [temperature, setTemperature] = useState<number>(999);
   const [coolingState, setCoolingState] = useState<string>("Unknown");
 
   const alertList = ["Tryna smoke?", "No way!", "I'm Arjun!"];
@@ -34,7 +34,9 @@ function ThermostatWidget() {
           <div>Set to</div>
           <div>69</div>
         </div> */}
-        <div className="current-temperature">{Math.round(temperature)}</div>
+        <div className="current-temperature">
+          {temperature < 999 && Math.round(temperature)}
+        </div>
         {/* <div className="cooling-state">Cooling State: {coolingState}</div> */}
       </div>
     </div>
