@@ -3,7 +3,7 @@
 }
 
 .store-list {
-
+    overflow-y: scroll; /* Enable vertical scrolling */
 }
 
 .add-store-list-item { 
