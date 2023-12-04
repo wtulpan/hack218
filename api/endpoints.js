@@ -27,7 +27,7 @@ async function grocery(type, data) {
         const [table_data, bullshit] = await db.execute(`insert into grocery_items (list_id, description) values ("${list_id}", "${data}")`)
         return {'message': 'success'}
     } else if(type === 'DELETE') {
-        const [table_data, bullshit] = await db.execute(`update grocery_item set deleted=1 where id=${data}`)
+        const [table_data, bullshit] = await db.execute(`update grocery_items set deleted=1 where id=${data}`)
         return {'message': 'success'}
     } else {
         return {'error': `${type} is not supported for this endpoint`}
