@@ -106,6 +106,15 @@ app.post('/api/chores', async (req, res) => {
     }
 });
 
+app.post('/api/alerts/history', async (req, res) => {
+    try {
+        const data = await endpoints['alerts_history']('GET');
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+});
+
 
 // Create an HTTPS server
 const server = https.createServer(options, app);

@@ -59,4 +59,13 @@ async function chores(type, data) {
     }
 }
 
-module.exports = {'alerts': alerts, 'grocery': grocery, 'newGroceryList': newGroceryList, 'chores': chores}
+async function alert_history(type, data) {
+    if(type === 'GET') {
+        const [table_data, bullshit] = await db.execute(`select text, created from alerts`)
+        return table_data
+    } else {
+
+    }
+}
+
+module.exports = {'alerts': alerts, 'alert_history': alert_history, 'grocery': grocery, 'newGroceryList': newGroceryList, 'chores': chores}
