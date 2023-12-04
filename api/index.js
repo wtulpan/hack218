@@ -12,8 +12,17 @@ const options = {
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.cert'),
 };
+
 app.use(cors())
 app.use(express.json());
+app.use((req, res, next) => {
+  const startTime = process.hrtime();
+  req.startTime = startTime;
+  next();
+  const endTime = process.hrtime(startTime);
+  const elapsedTime = (endTime[0] * 1000) + (endTime[1] / 1e6)
+  console.log(`[${req.method}][${res.statusCode}][${elapsedTime.toFixed(2)}ms] ${req.path}`);
+});
 
 // Endpoints
 // Alerts

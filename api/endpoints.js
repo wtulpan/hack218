@@ -2,7 +2,6 @@ const db = require('./db');
 
 async function alerts(type, data) {
     const dt = new Date()
-    console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][alerts][${type}]`)
     if(type === 'GET') {
         const [table_data, bullshit] = await db.execute(`select * from alerts order by created desc limit 5`)
         return table_data
@@ -19,7 +18,6 @@ async function alerts(type, data) {
 
 async function grocery(type, data) {
     const dt = new Date()
-    console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][grocery][${type}]`)
     if(type === 'GET') {
         const [table_data, bullshit] = await db.execute(`select * from grocery_items where list_id=(select max(id) from grocery_list) order by created desc`)
         return table_data
@@ -38,7 +36,6 @@ async function grocery(type, data) {
 
 async function newGroceryList(type, data) {
     const dt = new Date()
-    console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][newGroceryList][${type}]`)
     if(type === 'PUT') {
         const [t, b] = await db.execute(`select max(id) from grocery_list`)
         let list_id = Object.values(t[0])[0]
@@ -50,7 +47,6 @@ async function newGroceryList(type, data) {
 
 async function chores(type, data) {
     const dt = new Date()
-    console.log(`[${dt.toISOString().split('T')[1].split('.')[0]}][chores][${type}]`)
     if(type === 'GET') {
         const [table_data, bullshit] = await db.execute(`select c.name as name, ch.chore_id as id, ch.completed as completed from chores c join chore_history ch on c.id=ch.chore_id order by ch.completed;`)
         return table_data
